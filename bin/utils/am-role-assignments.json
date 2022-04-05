@@ -1,0 +1,28 @@
+[
+    {
+      "email": "TEST_SYSTEM_USER@mailinator.com",
+      "roleAssignments": [
+        {
+          "roleType": "CASE",
+          "roleName": "[APPLICANTSOLICITOR]",
+          "grantType": "SPECIFIC",
+          "roleCategory": "PROFESSIONAL",
+          "classification": "RESTRICTED",
+          "readOnly": false,
+          "attributes": { "caseType": "PRLAPPS", "jurisdiction": "PRIVATELAW" },
+          "authorisations": []
+        },
+        {
+          "roleType": "CASE",
+          "roleName": "[APPLICANTSOLICITOR]",
+          "grantType": "CHALLENGED",
+          "roleCategory": "PROFESSIONAL",
+          "classification": "RESTRICTED",
+          "readOnly": false,
+          "attributes": { "caseType": "PRLAPPS", "jurisdiction": "PRIVATELAW" },
+          "authorisations": []
+        }
+      ],
+      "overrideAll": true
+    }
+  ]
