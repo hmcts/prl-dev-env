@@ -14,6 +14,7 @@ az acr login --name hmctsprivate --subscription 8999dec3-0104-4a27-94ee-65885597
 
 [[ -d $API_DIR ]] || git clone git@github.com:hmcts/prl-ccd-definitions.git
 
+#docker-compose stop
 docker-compose pull
 docker-compose up -d idam-api fr-am fr-idm idam-web-public shared-db
 

@@ -368,7 +368,7 @@ services:
     environment:
       RUNS_LOCALLY: 'true'
       XUI_URL: http://localhost:3000
-      SOUTHAMPTON_COURT_EMAIL_ADDRESS: "${SOUTHAMPTON_COURT_EMAIL_ADDRESS}"
+      SOUTHAMPTON_COURT_EMAIL_ADDRESS: aloknath.datta@hmcts.net
       S2S_URL: http://rpe-service-auth-provider-aat.service.core-compute-aat.internal
       S2S_SECRET: "${S2S_SECRET}"
       IDAM_API_BASEURL: http://idam-api:5000
