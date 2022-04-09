@@ -34,7 +34,7 @@ XUI_ROLES_ARR=("XUI-Admin" "XUI-SuperUser" "caseworker" "caseworker-privatelaw" 
 XUI_ROLES_STR=$(printf "\"%s\"," "${XUI_ROLES_ARR[@]}")
 XUI_ROLES="[${XUI_ROLES_STR%?}]"
 
-AUTH_TOKEN=$(curl -s -H 'Content-Type: application/x-www-form-urlencoded' -XPOST "${IDAM_URI}/loginUser?username=idamOwner@hmcts.net&password=Ref0rmIsFun" | docker run --rm --interactive stedolan/jq -r .api_auth_token)
+AUTH_TOKEN=$(curl -s -H 'Content-Type: application/x-www-form-urlencoded' -XPOST "${IDAM_URI}/loginUser?username=${IDAM_ADMIN_USERNAME}&password=${IDAM_ADMIN_PASSWORD}" | docker run --rm --interactive stedolan/jq -r .api_auth_token)
 HEADERS=(-H "Authorization: AdminApiAuthToken ${AUTH_TOKEN}" -H "Content-Type: application/json")
 
 echo "Setup private law COS client"
@@ -42,10 +42,10 @@ echo "Setup private law COS client"
 curl -s -o /dev/null -XPOST "${HEADERS[@]}" ${IDAM_URI}/services \
  -d '{ "activationRedirectUrl": "", "allowedRoles": '"${ROLES}"', "description": "'${PRL_COS_CLIENT_ID}'", "label": "'${PRL_COS_CLIENT_ID}'", "oauth2ClientId": "'${PRL_COS_CLIENT_ID}'", "oauth2ClientSecret": "'${PRL_CLIENT_SECRET}'", "oauth2RedirectUris": '${REDIRECT_URI}', "oauth2Scope": "openid profile roles", "onboardingEndpoint": "string", "onboardingRoles": '"${ROLES}"', "selfRegistrationAllowed": true}'
 
-echo "Setup private law DGS client"
+# echo "Setup private law DGS client"
 # Create a client
-curl -s -o /dev/null -XPOST "${HEADERS[@]}" ${IDAM_URI}/services \
- -d '{ "activationRedirectUrl": "", "allowedRoles": '"${ROLES}"', "description": "'${PRL_DGS_CLIENT_ID}'", "label": "'${PRL_DGS_CLIENT_ID}'", "oauth2ClientId": "'${PRL_DGS_CLIENT_ID}'", "oauth2ClientSecret": "'${PRL_CLIENT_SECRET}'", "oauth2RedirectUris": '${REDIRECT_URI}', "oauth2Scope": "openid profile roles", "onboardingEndpoint": "string", "onboardingRoles": '"${ROLES}"', "selfRegistrationAllowed": true}'
+# curl -s -o /dev/null -XPOST "${HEADERS[@]}" ${IDAM_URI}/services \
+#  -d '{ "activationRedirectUrl": "", "allowedRoles": '"${ROLES}"', "description": "'${PRL_DGS_CLIENT_ID}'", "label": "'${PRL_DGS_CLIENT_ID}'", "oauth2ClientId": "'${PRL_DGS_CLIENT_ID}'", "oauth2ClientSecret": "'${PRL_CLIENT_SECRET}'", "oauth2RedirectUris": '${REDIRECT_URI}', "oauth2Scope": "openid profile roles", "onboardingEndpoint": "string", "onboardingRoles": '"${ROLES}"', "selfRegistrationAllowed": true}'
 
 echo "Setup xui client"
 # Create a client
