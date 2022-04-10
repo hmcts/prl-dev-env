@@ -23,7 +23,7 @@ PRL_COS_CLIENT_ID="prl_cos_api"
 PRL_DGS_CLIENT_ID="prl_dgs_api"
 XUI_CLIENT_ID="xuiwebapp"
 
-PRL_CLIENT_SECRET=${OAUTH2_CLIENT_SECRET}
+PRL_CLIENT_SECRET=${PRL_CLIENT_SECRET}
 XUI_CLIENT_SECRET=${OAUTH2_CLIENT_SECRET}
 
 ROLES_ARR=("ccd-import" "caseworker-privatelaw" "caseworker" "caseworker-privatelaw-courtadmin" "caseworker-privatelaw-systemupdate" "caseworker-privatelaw-superuser" "caseworker-privatelaw-la" "caseworker-privatelaw-judge" "caseworker-privatelaw-solicitor")
