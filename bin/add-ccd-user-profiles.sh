@@ -9,7 +9,7 @@ EOM
 
 echo "Getting service_token from s2s"
 dir=$(dirname ${0})
-serviceToken=$(${dir}/utils/test/s2s-token.sh ccd_data)
+serviceToken=$(${dir}/utils/s2s-token.sh ccd_data)
 
 users=$(echo "${CCD_USERS}" | tr "," "\n")
 for user in $users

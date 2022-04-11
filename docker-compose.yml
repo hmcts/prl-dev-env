@@ -366,14 +366,30 @@ services:
     image: "hmctspublic.azurecr.io/prl/cos:latest"
     container_name: prl-cos-api
     environment:
-      RUNS_LOCALLY: 'true'
-      XUI_URL: http://localhost:3000
-      SOUTHAMPTON_COURT_EMAIL_ADDRESS: aloknath.datta@hmcts.net
-      S2S_URL: http://rpe-service-auth-provider-aat.service.core-compute-aat.internal
-      S2S_SECRET: "${S2S_SECRET}"
-      IDAM_API_BASEURL: http://idam-api:5000
-      IDAM_CLIENT_SECRET: "${OAUTH2_CLIENT_SECRET}"
-      CASE_DATA_STORE_BASEURL: http://ccd-data-store-api:4452
+      AUTH_IDAM_CLIENT_BASEURL: http://idam-api:5000
+      AUTH_PROVIDER_SERVICE_CLIENT_BASEURL: http://rpe-service-auth-provider-aat.service.core-compute-aat.internal
+      AUTH_PROVIDER_SERVICE_CLIENT_MICROSERVICE: prl_cos_api
+      AUTH_PROVIDER_SERVICE_CLIENT_TOKENTIMETOLIVEINSECONDS: 900
+      CCD_CASE_DOCS_AM_API: http://localhost:4455
+      CORE_CASE_DATA_API_URL: http://localhost:4452
+      DOCMOSIS_SERVICE_BASE_URL: https://docmosis.aat.platform.hmcts.net
+      FACT_API: http://fact-api-aat.service.core-compute-aat.internal
+      FEATURE_EXAMPLE: "true"
+      FEE_REGISTER_API_URL: http://localhost:4182
+      IDAM_API_URL: http://idam-api:5000
+      IDAM_CLIENT_ID: prl_cos_api
+      IDAM_CLIENT_REDIRECT_URI: http://localhost:4044/oauth2/callback
+      IDAM_CLIENT_SECRET: "${PRL_CLIENT_SECRET}"
+      IDAM_S2S_AUTH_MICROSERVICE:  prl_cos_api
+      IDAM_S2S_AUTH_URL: http://rpe-service-auth-provider-aat.service.core-compute-aat.internal
+      S2S_SECRET: "${PRL_S2S_SECRET}"
+      PAY_CALLBACK_URL: http://localhost:4044/service-request-update
+      PAY_URL: http://localhost:4421
+      PRL_DGS_API_URL: http://localhost:4550
+      PRL_S2S_AUTHORISED_SERVICES: payment_app
+      REFORM_SERVICE_NAME: prl_cos_api
+      RUNS_LOCALLY: "true"
+      XUI_URL: https://localhost:3000/cases/case-details
       IDAM_SYSTEM_UPDATE_USERNAME: "${IDAM_SYSTEM_UPDATE_USERNAME}"
       IDAM_SYSTEM_UPDATE_PASSWORD: "${IDAM_SYSTEM_UPDATE_PASSWORD}"
     ports:
@@ -383,14 +399,15 @@ services:
     image: "hmctspublic.azurecr.io/prl/dgs:latest"
     container_name: prl-dgs-api
     environment:
-      AUTH_PROVIDER_SERVICE_CLIENT_BASEURL: "http://rpe-service-auth-provider-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal"
-      IDAM_S2S_URL: "http://rpe-service-auth-provider-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal"
-      DOCMOSIS_SERVICE_BASE_URL: "https://docmosis.aat.platform.hmcts.net"
-      CCD_CASE_DOCS_AM_API: "http://ccd-case-document-am-api-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal"
-      REFORM_SERVICE_NAME: "prl"
-      REFORM_TEAM: "prl"
+      AUTH_PROVIDER_SERVICE_CLIENT_BASEURL: http://rpe-service-auth-provider-aat.service.core-compute-aat.internal
       AUTH_PROVIDER_SERVICE_CLIENT_MICROSERVICE: "prl_cos_api"
-      AUTH_PROVIDER_SERVICE_CLIENT_TOKENTIMETOLIVEINSECONDS: "900"
+      AUTH_PROVIDER_SERVICE_CLIENT_TOKENTIMETOLIVEINSECONDS: 900
+      CCD_CASE_DOCS_AM_API: http://localhost:4455
+      DOCMOSIS_SERVICE_BASE_URL: https://docmosis.aat.platform.hmcts.net
+      FEATURE_EXAMPLE: "true"
+      IDAM_S2S_URL: http://rpe-service-auth-provider-aat.service.core-compute-aat.internal
+      REFORM_SERVICE_NAME: prl
+      REFORM_TEAM: prl
     ports:
       - 4550:4550
 
