@@ -38,7 +38,7 @@ The init script will clone the prl ccd definition repository into sub-folders, s
 
 Once everything has started you will be able to use the logins found in the `.env` file for:
 
-* http://localhost:3000 XUI Case manager: login `IDAM_CASEWORKER_USERNAME`/`PASSWORD`
+* http://localhost:3000 XUI Case manager: login `IDAM_TEST_SOLICITOR_USERNAME`/`PASSWORD`
 
 ## Usage
 
