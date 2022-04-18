@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-az keyvault secret show --vault-name prl-aat -o tsv --query value --name prl-local-env-config | base64 -d > .env
+az keyvault secret show --vault-name prl-aat -o tsv --query value --name prl-local-env-config > .env
 
 if [ -f .env ]
 then
