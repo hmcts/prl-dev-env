@@ -17,6 +17,7 @@ CLIENT_ID=${CLIENT_ID:-prl-cos-api}
 clientSecret=${PRL_CLIENT_SECRET}
 redirectUri=http://localhost:3000/oauth2/callback
 
+
 if [ -z "$IDAM_STUB_LOCALHOST" ]; then
   code=$(curl --insecure --fail --show-error --silent -X POST --user "${username}:${password}" "${IDAM_URL}/oauth2/authorize?redirect_uri=${redirectUri}&response_type=code&client_id=${CLIENT_ID}" -d "" | docker run --rm --interactive stedolan/jq -r .code)
 else
