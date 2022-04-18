@@ -389,7 +389,7 @@ services:
       PRL_S2S_AUTHORISED_SERVICES: payment_app
       REFORM_SERVICE_NAME: prl_cos_api
       RUNS_LOCALLY: "true"
-      XUI_URL: https://localhost:3000/cases/case-details
+      XUI_URL: http://localhost:3000/
       IDAM_SYSTEM_UPDATE_USERNAME: "${IDAM_SYSTEM_UPDATE_USERNAME}"
       IDAM_SYSTEM_UPDATE_PASSWORD: "${IDAM_SYSTEM_UPDATE_PASSWORD}"
     ports:

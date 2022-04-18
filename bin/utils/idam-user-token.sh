@@ -14,7 +14,7 @@ password=${2}
 IDAM_API_URL=http://localhost:5000
 IDAM_URL=${IDAM_STUB_LOCALHOST:-$IDAM_API_URL}
 CLIENT_ID=${CLIENT_ID:-prl-cos-api}
-clientSecret=${OAUTH2_CLIENT_SECRET}
+clientSecret=${PRL_CLIENT_SECRET}
 redirectUri=http://localhost:3000/oauth2/callback
 
 if [ -z "$IDAM_STUB_LOCALHOST" ]; then
