@@ -5,6 +5,9 @@ prl_local_caseworker@mailinator.com|PRIVATELAW|PRLAPPS|DRAFT
 prl_test_caseworker@mailinator.com|PRIVATELAW|PRLAPPS|DRAFT
 prl_local_solicitor@mailinator.com|PRIVATELAW|PRLAPPS|DRAFT
 prl_caseworker_admin@mailinator.com|PRIVATELAW|PRLAPPS|DRAFT
+prl_local_sysupdate@mailinator.com|PRIVATELAW|PRLAPPS|DRAFT
+TEST_SYSTEM_USER@mailinator.com|PRIVATELAW|PRLAPPS|DRAFT
+fprl_caseworker_solicitor@mailinator.com|PRIVATELAW|PRLAPPS|DRAFT
 EOM
 
 echo "Getting service_token from s2s"

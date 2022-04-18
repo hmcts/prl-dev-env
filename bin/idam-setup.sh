@@ -19,8 +19,7 @@ AM_REDIRECTS=("http://am-role-assignment-service:4096/oauth2redirect")
 AM_REDIRECTS_STR=$(printf "\"%s\"," "${AM_REDIRECTS[@]}")
 AM_REDIRECT_URI="[${AM_REDIRECTS_STR%?}]"
 
-PRL_COS_CLIENT_ID="prl_cos_api"
-PRL_DGS_CLIENT_ID="prl_dgs_api"
+PRL_COS_CLIENT_ID="prl-cos-api"
 XUI_CLIENT_ID="xuiwebapp"
 
 PRL_CLIENT_SECRET=${PRL_CLIENT_SECRET}
@@ -30,7 +29,7 @@ ROLES_ARR=("ccd-import" "caseworker-privatelaw" "caseworker" "caseworker-private
 ROLES_STR=$(printf "\"%s\"," "${ROLES_ARR[@]}")
 ROLES="[${ROLES_STR%?}]"
 
-XUI_ROLES_ARR=("XUI-Admin" "XUI-SuperUser" "caseworker" "caseworker-privatelaw" "caseworker-privatelaw-courtadmin" "caseworker-privatelaw-systemupdate" "caseworker-privatelaw-superuser" "caseworker-privatelaw-la" "caseworker-privatelaw-judge" "caseworker-privatelaw-solicitor")
+XUI_ROLES_ARR=("XUI-Admin" "XUI-SuperUser" "caseworker" "caseworker-privatelaw" "caseworker-privatelaw-courtadmin" "caseworker-privatelaw-systemupdate" "caseworker-privatelaw-superuser" "caseworker-privatelaw-la" "caseworker-privatelaw-judge" "caseworker-privatelaw-solicitor" "prd-admin" "caseworker-caa")
 XUI_ROLES_STR=$(printf "\"%s\"," "${XUI_ROLES_ARR[@]}")
 XUI_ROLES="[${XUI_ROLES_STR%?}]"
 
@@ -41,11 +40,6 @@ echo "Setup private law COS client"
 # Create a client
 curl -s -o /dev/null -XPOST "${HEADERS[@]}" ${IDAM_URI}/services \
  -d '{ "activationRedirectUrl": "", "allowedRoles": '"${ROLES}"', "description": "'${PRL_COS_CLIENT_ID}'", "label": "'${PRL_COS_CLIENT_ID}'", "oauth2ClientId": "'${PRL_COS_CLIENT_ID}'", "oauth2ClientSecret": "'${PRL_CLIENT_SECRET}'", "oauth2RedirectUris": '${REDIRECT_URI}', "oauth2Scope": "openid profile roles", "onboardingEndpoint": "string", "onboardingRoles": '"${ROLES}"', "selfRegistrationAllowed": true}'
-
-# echo "Setup private law DGS client"
-# Create a client
-# curl -s -o /dev/null -XPOST "${HEADERS[@]}" ${IDAM_URI}/services \
-#  -d '{ "activationRedirectUrl": "", "allowedRoles": '"${ROLES}"', "description": "'${PRL_DGS_CLIENT_ID}'", "label": "'${PRL_DGS_CLIENT_ID}'", "oauth2ClientId": "'${PRL_DGS_CLIENT_ID}'", "oauth2ClientSecret": "'${PRL_CLIENT_SECRET}'", "oauth2RedirectUris": '${REDIRECT_URI}', "oauth2Scope": "openid profile roles", "onboardingEndpoint": "string", "onboardingRoles": '"${ROLES}"', "selfRegistrationAllowed": true}'
 
 echo "Setup xui client"
 # Create a client
@@ -84,9 +78,9 @@ curl -s -o /dev/null -XPUT "${HEADERS[@]}" ${IDAM_URI}/services/${XUI_CLIENT_ID}
 
 echo "Creating idam users"
 ./bin/idam-create-user.sh caseworker,caseworker-privatelaw,caseworker-privatelaw-solicitor,caseworker-privatelaw-systemupdate,caseworker-privatelaw-courtadmin,caseworker-privatelaw-bulkscan,caseworker-privatelaw-superuser,caseworker-privatelaw-courtadmin-la $IDAM_CASEWORKER_USERNAME $IDAM_CASEWORKER_PASSWORD caseworker
-./bin/idam-create-user.sh caseworker,caseworker-privatelaw,caseworker-privatelaw-courtadmin $IDAM_TEST_CASEWORKER_USERNAME $IDAM_TEST_CASEWORKER_PASSWORD caseworker
+./bin/idam-create-user.sh caseworker,caseworker-privatelaw,caseworker-privatelaw-courtadmin $IDAM_COURT_ADMIN_USERNAME $IDAM_COURT_ADMIN_PASSWORD caseworker
 ./bin/idam-create-user.sh caseworker,caseworker-privatelaw,caseworker-privatelaw-solicitor $IDAM_TEST_SOLICITOR_USERNAME $IDAM_TEST_SOLICITOR_PASSWORD caseworker
 ./bin/idam-create-user.sh ccd-import $DEFINITION_IMPORTER_USERNAME $DEFINITION_IMPORTER_PASSWORD Default
-./bin/idam-create-user.sh caseworker,caseworker-privatelaw,caseworker-privatelaw-systemupdate $IDAM_SYSTEM_UPDATE_USERNAME $IDAM_SYSTEM_UPDATE_PASSWORD caseworker
+./bin/idam-create-user.sh caseworker,caseworker-privatelaw,caseworker-privatelaw-systemupdate,prd-admin,caseworker-caa $IDAM_SYSTEM_UPDATE_USERNAME $IDAM_SYSTEM_UPDATE_PASSWORD caseworker
 ./bin/idam-create-user.sh caseworker $CCD_SYSTEM_UPDATE_USERNAME $CCD_SYSTEM_UPDATE_PASSWORD caseworker
 echo "Idam setup complete"
