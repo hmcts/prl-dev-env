@@ -22,6 +22,7 @@ docker-compose up -d idam-api fr-am fr-idm idam-web-public shared-db
 
 echo "Starting IDAM set up"
 ./bin/idam-setup.sh
+./bin/idam-citizen-setup.sh
 echo "IDAM set up done"
 
 docker-compose up --build -d
