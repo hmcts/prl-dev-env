@@ -3,7 +3,7 @@ version: "3.5"
 
 services:
   am-role-assignment-service:
-    image: "${AM_ROLE_ASSIGNMENT_SERVICE_USE_LOCAL-hmctspublic.azurecr.io/}am/role-assignment-service:${AM_ROLE_ASSIGNMENT_SERVICE_TAG:-latest}"
+    image: "${AM_ROLE_ASSIGNMENT_SERVICE_USE_LOCAL-hmctsprod.azurecr.io/}am/role-assignment-service:${AM_ROLE_ASSIGNMENT_SERVICE_TAG:-latest}"
     environment:
       ROLE_ASSIGNMENT_DB_HOST: shared-database
       ROLE_ASSIGNMENT_DB_PORT: 5432
@@ -46,7 +46,7 @@ services:
       - ccd-docker-azure-blob-data:/opt/azurite/folder
 
   ccd-user-profile-api:
-    image: "${CCD_USER_PROFILE_API_USE_LOCAL-hmctspublic.azurecr.io/}ccd/user-profile-api:${CCD_USER_PROFILE_API_TAG:-latest}"
+    image: "${CCD_USER_PROFILE_API_USE_LOCAL-hmctsprod.azurecr.io/}ccd/user-profile-api:${CCD_USER_PROFILE_API_TAG:-latest}"
     environment:
       JAVA_TOOL_OPTIONS: -Xms128m -Xmx400m
       USER_PROFILE_DB_HOST: shared-database
@@ -63,7 +63,7 @@ services:
       - shared-database
 
   ccd-definition-store-api:
-    image: "${CCD_DEFINITION_STORE_API_USE_LOCAL-hmctspublic.azurecr.io/}ccd/definition-store-api:${CCD_DEFINITION_STORE_API_TAG:-latest}"
+    image: "${CCD_DEFINITION_STORE_API_USE_LOCAL-hmctsprod.azurecr.io/}ccd/definition-store-api:${CCD_DEFINITION_STORE_API_TAG:-latest}"
     environment:
       JAVA_TOOL_OPTIONS: -Xms128m -Xmx400m
       DEFINITION_STORE_DB_HOST: shared-database
@@ -88,7 +88,7 @@ services:
       - ccd-user-profile-api
 
   ccd-data-store-api:
-    image: "${CCD_DATA_STORE_API_USE_LOCAL-hmctspublic.azurecr.io/}ccd/data-store-api:${CCD_DATA_STORE_API_TAG:-latest}"
+    image: "${CCD_DATA_STORE_API_USE_LOCAL-hmctsprod.azurecr.io/}ccd/data-store-api:${CCD_DATA_STORE_API_TAG:-latest}"
     environment:
       JAVA_TOOL_OPTIONS: -Xms128m -Xmx600m
       DATA_STORE_DB_HOST: shared-database
@@ -127,7 +127,7 @@ services:
       - idam-api
 
   ccd-case-document-am-api:
-    image: "${CCD_CASE_DOCUMENT_AM_API_USE_LOCAL-hmctspublic.azurecr.io/}ccd/case-document-am-api:${CCD_CASE_DOCUMENT_AM_API_TAG:-latest}"
+    image: "${CCD_CASE_DOCUMENT_AM_API_USE_LOCAL-hmctsprod.azurecr.io/}ccd/case-document-am-api:${CCD_CASE_DOCUMENT_AM_API_TAG:-latest}"
     environment:
       CASE_DOCUMENT_AM_API_S2S_SECRET: "${IDAM_KEY_CASE_DOCUMENT}"
       CASE_DOCUMENT_S2S_AUTHORISED_SERVICES: ccd_case_document_am_api,ccd_gw,xui_webapp,ccd_data,bulk_scan_processor
@@ -152,7 +152,7 @@ services:
       - dm-store
 
   ccd-api-gateway:
-    image: hmctspublic.azurecr.io/ccd/api-gateway-web:latest
+    image: hmctsprod.azurecr.io/ccd/api-gateway-web:latest
     environment:
       IDAM_BASE_URL: http://idam-api:5000
       IDAM_USER_URL: http://idam-api:5000
@@ -198,7 +198,7 @@ services:
       - 9200:9200
 
   ccd-logstash:
-    image: hmctspublic.azurecr.io/ccd/logstash:ccd-divorce-logstash-latest
+    image: hmctsprod.azurecr.io/ccd/logstash:ccd-divorce-logstash-latest
     environment:
       - JAVA_TOOL_OPTIONS=-Xms128m -Xmx400m
       - XPACK_MONITORING_ENABLED=false
@@ -212,7 +212,7 @@ services:
       - shared-database
 
   doc-assembly-api:
-    image: hmctspublic.azurecr.io/dg/docassembly
+    image: hmctsprod.azurecr.io/dg/docassembly
     environment:
       - S2S_KEY=${DOC_ASSEMBLY_S2S_SECRET}
       - IDAM_API_BASE_URI=http://idam-api:5000
@@ -231,7 +231,7 @@ services:
       - dm-store
 
   dm-store:
-    image: "${DM_STORE_USE_LOCAL-hmctspublic.azurecr.io/}dm/store:${DM_STORE_TAG:-latest}"
+    image: "${DM_STORE_USE_LOCAL-hmctsprod.azurecr.io/}dm/store:${DM_STORE_TAG:-latest}"
     healthcheck:
       disable: true
     environment:
@@ -259,7 +259,7 @@ services:
     #   - 5006:5005
 
   fees-api:
-    image: hmctspublic.azurecr.io/fees-register/api:latest
+    image: hmctsprod.azurecr.io/fees-register/api:latest
     environment:
       ENABLE_FEE_LOADER: "true"
       SPRING_LIQUIBASE_ENABLED: "true"
@@ -297,7 +297,7 @@ services:
       - shared-db
 
   idam-api:
-    image: "hmctspublic.azurecr.io/idam/api:stable"
+    image: "hmctsprod.azurecr.io/idam/api:stable"
     environment:
       JAVA_TOOL_OPTIONS: -Xms128m -Xmx400m
       TESTING_SUPPORT_ENABLED: "true"
@@ -331,7 +331,7 @@ services:
       - shared-db
 
   idam-web-admin:
-    image: hmctspublic.azurecr.io/idam/web-admin:stable
+    image: hmctsprod.azurecr.io/idam/web-admin:stable
     ports:
       - 8082:8080
     environment:
@@ -340,7 +340,7 @@ services:
       - STRATEGIC_PUBLIC_URL=http://idam-web-public:8080
 
   idam-web-public:
-    image: "hmctspublic.azurecr.io/idam/web-public:stable"
+    image: "hmctsprod.azurecr.io/idam/web-public:stable"
     environment:
       JAVA_TOOL_OPTIONS: -Xms128m -Xmx256m
       STRATEGIC_SERVICE_URL: http://idam-api:5000
@@ -363,7 +363,7 @@ services:
       - 8765:8080
 
   prl-cos-api:
-    image: "hmctspublic.azurecr.io/prl/cos:latest"
+    image: "hmctsprod.azurecr.io/prl/cos:latest"
     container_name: prl-cos-api
     environment:
       AUTH_IDAM_CLIENT_BASEURL: http://idam-api:5000
@@ -396,7 +396,7 @@ services:
       - 4044:4044
 
   prl-dgs-api:
-    image: "hmctspublic.azurecr.io/prl/dgs:latest"
+    image: "hmctsprod.azurecr.io/prl/dgs:latest"
     container_name: prl-dgs-api
     environment:
       AUTH_PROVIDER_SERVICE_CLIENT_BASEURL: http://rpe-service-auth-provider-aat.service.core-compute-aat.internal
@@ -412,7 +412,7 @@ services:
       - 4550:4550
 
   payments-api:
-    image: hmctspublic.azurecr.io/payment/api:latest
+    image: hmctsprod.azurecr.io/payment/api:latest
     environment:
       payments.report.file.location: .
       PAYMENT_AUDIT_FILE: /tmp/payment-audit.log
@@ -501,7 +501,7 @@ services:
       - 8025:8025
 
   xui-manage-cases:
-    image: "${XUI_MANAGE_CASES_USE_LOCAL-hmctspublic.azurecr.io/}xui/webapp:${XUI_MANAGE_CASES_TAG:-latest}"
+    image: "${XUI_MANAGE_CASES_USE_LOCAL-hmctsprod.azurecr.io/}xui/webapp:${XUI_MANAGE_CASES_TAG:-latest}"
     environment:
       FEATURE_APP_INSIGHTS_ENABLED: "true"
       FEATURE_SECURE_COOKIE_ENABLED: "false"
